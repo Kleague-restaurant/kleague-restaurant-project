@@ -5,7 +5,6 @@ import ConditionalFooter from '@/components/Layout/Footer/ConditionalFooter'
 import Script from 'next/script'
 import { cn } from '@/utils/cn'
 
-
 export const metadata: Metadata = {
   title: 'K리그 맛집 지도',
   description: 'K리그 구장 근처 맛집을 소개합니다.',
