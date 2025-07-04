@@ -105,4 +105,18 @@ export const customSelectOptions = (...args: ClassValue[]) =>
 
 // Card
 export const Card = (...args: ClassValue[]) =>
-  cn('p-5', 'rounded-md', 'shadow-lg', ...args)
+  cn('bg-white', 'p-5', 'rounded-md', 'shadow-lg', ...args)
+
+export const Pages = (...args: ClassValue[]) =>
+  cn(
+    'flex',
+    'flex-col',
+    'items-center',
+    'gap-6',
+    'w-full',
+    'min-w-[375px]',
+    'lg:max-w-[1200px]',
+    'mx-auto',
+    'p-3',
+    ...args,
+  )

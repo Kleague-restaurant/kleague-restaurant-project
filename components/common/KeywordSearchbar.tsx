@@ -2,14 +2,19 @@ import { flexColIJCenter } from '@/styles/customStyle'
 import { cn } from '@/utils/cn'
 import { Search } from 'lucide-react'
 
-type MainSearchbarProps = {
+type KeywordSearchbarProps = {
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  isMain?: boolean
 }
 
-function MainSearchbar({ value, onChange }: MainSearchbarProps) {
+function KeywordSearchbar({
+  value,
+  onChange,
+  isMain = true,
+}: KeywordSearchbarProps) {
   return (
-    <div className={cn('relative', 'w-full', 'max-w-md')}>
+    <div className={cn('relative', 'w-full', isMain && 'max-w-md')}>
       <div
         className={flexColIJCenter(
           'absolute',
@@ -26,7 +31,11 @@ function MainSearchbar({ value, onChange }: MainSearchbarProps) {
       </div>
       <input
         type="text"
-        placeholder="구장명 또는 팀명으로 검색"
+        placeholder={
+          isMain
+            ? '구장명 또는 팀명으로 검색'
+            : '맛집 이름을 검색하세요'
+        }
         className={cn(
           'block',
           'rounded-xl',
@@ -47,4 +56,4 @@ function MainSearchbar({ value, onChange }: MainSearchbarProps) {
   )
 }
 
-export default MainSearchbar
+export default KeywordSearchbar

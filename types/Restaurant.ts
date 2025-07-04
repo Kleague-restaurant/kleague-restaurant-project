@@ -1,17 +1,7 @@
-import { User } from './Auth'
+import { Review } from './Review'
+import { Stadium } from './Stadium'
 
-export interface Review {
-  id?: number
-  content?: string
-  rating: number
-  userId?: number
-  restaurantId?: number
-  createdAt?: string
-  updatedAt?: string
-  user?: User
-}
-
-export interface Restaurant {
+export type Restaurant = {
   id: number
   name: string
   category: string
@@ -22,12 +12,10 @@ export interface Restaurant {
   businessHours: string
   team: string
   remark: string | null
-  stadiumId: number
-  _count?: {
-    rating: number
-  }
-  reviews: Review[]
+  stadium: Stadium
   avgRating: number
+  reviewCount?: number
+  reviews?: Review[]
   distance?: number
 }
 
@@ -36,3 +24,6 @@ export interface RestaurantCardInfo {
   showDistance?: boolean
   stadiumName?: string
 }
+
+export type RestaurantSortType = '평점순' | '리뷰순' | '이름순'
+export type RestaurantViewType = '카드형' | '리스트형'

@@ -1,38 +1,37 @@
+'use client'
 import {
   customSelectOptions,
   flexRowICenter,
 } from '@/styles/customStyle'
 import { cn } from '@/utils/cn'
-import { ChevronDown } from 'lucide-react'
+import { Check, ChevronDown } from 'lucide-react'
 import React, { useState } from 'react'
 
 type CustomSelectInputProps = {
   placeholder: string
   name: string
   value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (value: string) => void
   options: string[]
+  isFiltering?: boolean
 }
 
 function CustomSelectInput({
   placeholder,
-  name,
   value,
   onChange,
   options,
+  isFiltering = false,
 }: CustomSelectInputProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const handleOptionClick = (opt: string) => {
-    const event = {
-      target: { name, value: opt },
-    } as React.ChangeEvent<HTMLInputElement>
-    onChange(event)
+    onChange(opt)
     setIsOpen(false)
   }
 
   return (
-    <div className={cn('relative', 'w-full')}>
+    <div className={cn('relative', 'w-full', 'bg-white')}>
       <button
         className={cn(
           'w-full',
@@ -41,6 +40,8 @@ function CustomSelectInput({
           'rounded-md',
           'border',
           'border-[#ccc]',
+          'text-sm',
+          isFiltering && 'rounded-full py-0 px-6 h-[32px]',
         )}
       >
         <div className={flexRowICenter('justify-between')}>
@@ -78,12 +79,19 @@ function CustomSelectInput({
             <li
               key={opt}
               onClick={() => handleOptionClick(opt)}
-              className={cn(
+              className={flexRowICenter(
                 customSelectOptions(),
                 'hover:bg-gray-100',
                 'cursor-pointer',
+                opt === value && 'bg-gray-100',
               )}
             >
+              {opt === value && (
+                <Check
+                  size={16}
+                  color="#ccc"
+                />
+              )}
               {opt}
             </li>
           ))}

@@ -3,7 +3,7 @@ import AuthButtons from '@/components/Auth/AuthButtons'
 import AuthInput from '@/components/Auth/AuthInput'
 import AuthTitle from '@/components/Auth/AuthTitle'
 import Modal from '@/components/common/Modal'
-import useAuthForm from '@/hooks/useAuthForm'
+import useAuthForm from '@/hooks/useForm'
 import useModal from '@/hooks/useModal'
 import { login } from '@/services/auth'
 import { useAuthStore } from '@/store/useAuthStore'
@@ -30,12 +30,15 @@ function LoginPage() {
   const { modalOpen, setModalOpen, modalContent, openModal } =
     useModal()
 
-  const { setAccessToken } = useAuthStore()
+  const { loggedIn } = useAuthStore()
 
   const handleLogin = async () => {
     try {
-      const { accessToken } = await login(form.email, form.password)
-      setAccessToken(accessToken)
+      const { user, accessToken } = await login(
+        form.email,
+        form.password,
+      )
+      loggedIn(user.id, accessToken)
       openModal({
         isError: false,
         title: '로그인 성공',

@@ -6,7 +6,7 @@ import MainRestaurantCard from './RestaurantCard'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
-import LoadingSpinner from '@/components/LoadingSpinner'
+import LoadingSpinner from '@/components/common/LoadingSpinner'
 
 type RestaurantTabsContentProps = {
   restaurants: Restaurant[]

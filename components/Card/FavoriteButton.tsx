@@ -6,8 +6,12 @@ import {
   fetchFavorites,
 } from '@/services/favorites'
 import { useAuthStore } from '@/store/useAuthStore'
+import useModal from '@/hooks/useModal'
+import axiosInstance from '@/utils/axiosInstance'
 import { Heart } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import Modal from '../common/Modal'
+
 
 interface FavoriteButtonProps {
   restaurantId: number
@@ -19,6 +23,9 @@ export default function FavoriteButton({
   const [isFavorite, setIsFavorite] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const accessToken = useAuthStore((state) => state.accessToken)
+  const { modalOpen, setModalOpen, modalContent, openModal } =
+    useModal()
+
 
   useEffect(() => {
     const checkFavorite = async () => {
@@ -41,7 +48,14 @@ export default function FavoriteButton({
 
   const toggleFavorite = async () => {
     if (!accessToken) {
-      alert('즐겨찾기는 로그인 후에 사용 가능합니다.')
+      openModal({
+        isError: false,
+        title: '로그인이 필요합니다',
+        description: '즐겨찾기 기능을 사용하려면 로그인 해주세요.',
+        onBtnClick: () => {
+          window.location.href = '/login'
+        },
+      })
       return
     }
     if (isLoading) return
@@ -71,6 +85,11 @@ export default function FavoriteButton({
       <Heart
         fill={isFavorite ? 'red' : 'none'}
         color={isFavorite ? 'red' : 'black'}
+      />
+      <Modal
+        isOpen={modalOpen}
+        onOpenChange={setModalOpen}
+        contents={modalContent}
       />
     </button>
   )

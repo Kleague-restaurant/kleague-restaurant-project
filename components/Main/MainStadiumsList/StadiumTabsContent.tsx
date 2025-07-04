@@ -1,4 +1,4 @@
-import LoadingSpinner from '@/components/LoadingSpinner'
+import LoadingSpinner from '@/components/common/LoadingSpinner'
 import { TabsContent } from '@/components/ui/tabs'
 import { KLEAGUE_TYPE } from '@/constants'
 import { cn } from '@/utils/cn'

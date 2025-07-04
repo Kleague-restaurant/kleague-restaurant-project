@@ -15,18 +15,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const ncpClientId = process.env.NEXT_PUBLIC_NCP_CLIENT_ID || ''
+
   return (
     <html lang="ko">
       <head>
         <Script
           type="text/javascript"
           strategy="beforeInteractive"
-          src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.NEXT_PUBLIC_NCP_CLIENT_ID}`}
+          src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${ncpClientId}`}
         ></Script>
       </head>
       <body>
         <Header />
-        <div className={cn('mt-[80px]')}>{children}</div>
+        <div className={cn('mt-[80px]', 'bg-[#f9fafb]')}>
+          {children}
+        </div>
         <ConditionalFooter />
       </body>
     </html>

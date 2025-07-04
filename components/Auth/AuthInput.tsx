@@ -6,7 +6,7 @@ import {
 import { cn } from '@/utils/cn'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
-import CustomSelectInput from '../CustomSelectInput'
+import CustomSelectInput from '../common/CustomSelectInput'
 import AuthError from './AuthError'
 
 type AuthInputProps = {
@@ -38,7 +38,11 @@ function AuthInput({
           placeholder="좋아하는 구단을 선택해주세요"
           name={name}
           value={value}
-          onChange={onChange}
+          onChange={(val) =>
+            onChange({
+              target: { name, value: val },
+            } as React.ChangeEvent<HTMLInputElement>)
+          }
           options={options}
         />
       )

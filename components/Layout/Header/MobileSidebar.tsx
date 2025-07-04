@@ -9,7 +9,7 @@ type MobileSidebarProps = {
 
 function MobileSidebar({ open, onClose }: MobileSidebarProps) {
   const router = useRouter()
-  const { accessToken, clearAccessToken } = useAuthStore()
+  const { accessToken, loggedOut } = useAuthStore()
 
   const actions = [
     { label: '구장 목록', href: '/stadiums' },
@@ -27,7 +27,7 @@ function MobileSidebar({ open, onClose }: MobileSidebarProps) {
           {
             label: '로그아웃',
             href: '/',
-            onClick: () => clearAccessToken(),
+            onClick: () => loggedOut(),
           },
         ]),
   ]
